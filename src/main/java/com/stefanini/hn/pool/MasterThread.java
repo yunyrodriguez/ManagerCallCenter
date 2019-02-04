@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.stefanini.hn.constants.CallCenterConstants;
 import com.stefanini.hn.util.IncomingCalls;
 
 /**
@@ -40,7 +41,8 @@ public class MasterThread extends Thread implements Serializable {
 		super();
 		this.call = listCall;
 		this.workingQueue = new ArrayBlockingQueue<Runnable>(10);
-		this.executorService = new ThreadPoolExecutor(this.call.size(), this.call.size(), 200, TimeUnit.MILLISECONDS, this.workingQueue);
+		this.executorService = new ThreadPoolExecutor(this.call.size(), this.call.size(),
+				Integer.parseInt(CallCenterConstants.KEEP_ALIVE), TimeUnit.MILLISECONDS, this.workingQueue);
 	}
 
 	/* (non-Javadoc)

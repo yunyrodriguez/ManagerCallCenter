@@ -34,5 +34,4 @@ public class WorkerThread implements Runnable {
 		Dispatcher.dispatchCall(call);
 
 	}
-
 }

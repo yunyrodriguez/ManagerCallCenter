@@ -45,5 +45,8 @@ public class CallCenterConstants {
 	
 	/** Attribute that determine a Constant of FORMAT_DATE. */
 	public final static String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss";
+	
+	/** Attribute that determine a Constant of KEEP_ALIVE. */
+	public final static String KEEP_ALIVE = "200";
 
 }
