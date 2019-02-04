@@ -9,16 +9,33 @@ import java.util.concurrent.TimeUnit;
 
 import com.stefanini.hn.util.IncomingCalls;
 
+/**
+ * MasterThread.
+ *
+ * @author Yuny Rene Rodriguez Perez <mailto: yrperez@stefanini.com />
+ * @version 
+ * @see 
+ * @since 02-04-2019 12:25:34 PM 2019
+ */
 public class MasterThread extends Thread implements Serializable {
 
+	/** Attribute that determine a Constant of serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** Attribute that determine call. */
 	private final ArrayList<IncomingCalls> call;
 
+	/** Attribute that determine executorService. */
 	private final ThreadPoolExecutor executorService;
 
+	/** Attribute that determine workingQueue. */
 	private final BlockingQueue<Runnable> workingQueue;
 
+	/**
+	 * Instantiates a new master thread.
+	 *
+	 * @param listCall the list call
+	 */
 	public MasterThread(ArrayList<IncomingCalls> listCall) {
 		super();
 		this.call = listCall;
@@ -26,6 +43,9 @@ public class MasterThread extends Thread implements Serializable {
 		this.executorService = new ThreadPoolExecutor(this.call.size(), this.call.size(), 200, TimeUnit.MILLISECONDS, this.workingQueue);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 
@@ -44,6 +64,11 @@ public class MasterThread extends Thread implements Serializable {
 		this.executorService.shutdown();
 	}
 
+	/**
+	 * Validate response.
+	 *
+	 * @param response the response
+	 */
 	private void validateResponse(final IncomingCalls response) {
 
 		final WorkerThread worker = new WorkerThread(response);

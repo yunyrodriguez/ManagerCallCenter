@@ -65,5 +65,6 @@ public class DispatcherTest extends AbstractTest{
 		IncomingCalls call = new IncomingCalls(dateFirst, "9878-8798");
 		Dispatcher dispatcher = new Dispatcher(call);
 		dispatcher.dispatchCall(call);
+		
 	}
 }
