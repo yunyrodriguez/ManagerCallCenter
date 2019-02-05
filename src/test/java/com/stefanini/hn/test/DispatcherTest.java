@@ -1,4 +1,5 @@
 package com.stefanini.hn.test;
+
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
@@ -11,58 +12,44 @@ import com.stefanini.hn.pool.MasterThread;
 import com.stefanini.hn.test.AbstractTest;
 import com.stefanini.hn.util.IncomingCalls;
 
-public class DispatcherTest extends AbstractTest{
-
-	
+public class DispatcherTest extends AbstractTest {
 
 	@Test
 	public void entityManagerFactoryOK() {
-		
+
 		assertNotNull(emf);
 	}
-	
+
 	@Test
 	public void entityManagerOK() {
-		
+
 		assertNotNull(em);
 	}
-	//@Test
+
+	@Test
 	public void xCall() {
 
-		Date dateFirst = new Date();
-		ArrayList<IncomingCalls> listCall = new ArrayList<IncomingCalls>();
-		IncomingCalls call = new IncomingCalls(dateFirst, "9878-8798");
-		listCall.add(call);
-		IncomingCalls call2 = new IncomingCalls(dateFirst, "9878-8777");
-		listCall.add(call2);
-		IncomingCalls call3 = new IncomingCalls(dateFirst, "9878-8798");
-		listCall.add(call3);
-		IncomingCalls call4 = new IncomingCalls(dateFirst, "9878-8777");
-		listCall.add(call4);
-		IncomingCalls call5 = new IncomingCalls(dateFirst, "9878-8798");
-		listCall.add(call5);
-		IncomingCalls call6 = new IncomingCalls(dateFirst, "9878-8777");
-		listCall.add(call6);
-		IncomingCalls call7 = new IncomingCalls(dateFirst, "9878-8798");
-		listCall.add(call7);
-		IncomingCalls call8 = new IncomingCalls(dateFirst, "9878-8777");
-		listCall.add(call8);
-		IncomingCalls call9 = new IncomingCalls(dateFirst, "9878-8798");
-		listCall.add(call9);
-		IncomingCalls call10 = new IncomingCalls(dateFirst, "9878-8777");
-		listCall.add(call10);
-
-		MasterThread master = new MasterThread(listCall);
+		MasterThread master = new MasterThread(getList());
 		master.start();
 	}
-	
-	@Test
+
+	// @Test
 	public void Call() {
 
 		Date dateFirst = new Date();
 		IncomingCalls call = new IncomingCalls(dateFirst, "9878-8798");
 		Dispatcher dispatcher = new Dispatcher(call);
 		dispatcher.dispatchCall(call);
-		
+
+	}
+
+	public ArrayList<IncomingCalls> getList() {
+		ArrayList<IncomingCalls> listCall = new ArrayList<IncomingCalls>();
+		Date dateFirst = new Date();
+		for (int i = 0; i < 10; i++) {
+			IncomingCalls call = new IncomingCalls(dateFirst, "9878-874" + i);
+			listCall.add(call);
+		}
+		return listCall;
 	}
 }
